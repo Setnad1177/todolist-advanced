@@ -24,9 +24,9 @@ export function Todolist() {
                 </li>
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                {/*<button>All</button>*/}
+                {/*<button>Active</button>*/}
+                {/*<button>Completed</button>*/}
             </div>
         </div>
     )
