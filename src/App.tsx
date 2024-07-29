@@ -8,11 +8,11 @@ let tasks1: Array<TaskType> = [
     { id: 3, title: "CSS", isDone: false },
 ]
 
-let tasks2: Array<TaskType> = [
-    { id: 1, title: "Terminator", isDone: true },
-    { id: 2, title: "XXX", isDone: true },
-    { id: 3, title: "Gentlemen of fortune", isDone: false },
-]
+// let tasks2: Array<TaskType> = [
+//     { id: 1, title: "Terminator", isDone: true },
+//     { id: 2, title: "XXX", isDone: true },
+//     { id: 3, title: "Gentlemen of fortune", isDone: false },
+// ]
 
 function App() {
     return (
