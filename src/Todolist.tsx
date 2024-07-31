@@ -9,6 +9,7 @@ export type TaskType = {
 type PropsType = {
     title: string;
     tasks: Array<TaskType>;
+    removeTask(id: number): void;
 }
 
 export function Todolist(props: PropsType) {
@@ -26,7 +27,7 @@ export function Todolist(props: PropsType) {
                         return <li>
                             <input type="checkbox" checked={true}/>
                             <span>{t.title}</span>
-                            <button onClick={ () => { alert(t.id)} }>x</button>
+                            <button onClick={ () => { props.removeTask(t.id)} }>x</button>
                         </li>
                     })
                 }
