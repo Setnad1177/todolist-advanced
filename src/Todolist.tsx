@@ -6,9 +6,10 @@ type PropsType = {
     subTitle?: string
     description?: string
     tasks: TaskType[]
+    date?: string
 }
 
-export const Todolist = ({title, tasks}: PropsType) => {
+export const Todolist = ({title, tasks, date}: PropsType) => {
 
 
     return (
@@ -17,8 +18,7 @@ export const Todolist = ({title, tasks}: PropsType) => {
             <h3>{title}</h3>
             {/*<h4>{subTitle}</h4>*/}
             {/*<p>{description}</p>*/}
-
-            <div>{tasks.map(t => t.title)}</div>
+            {/*<div>{tasks.map(t => t.title)}</div>*/}
 
             <div>
                 <input/>
@@ -26,15 +26,13 @@ export const Todolist = ({title, tasks}: PropsType) => {
             </div>
 
             <ul>
-                <li>
-                    <input type="checkbox" checked={true}/> <span>HTML&CSS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={true}/> <span>JS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={false}/> <span>React</span>
-                </li>
+                {tasks.map(task => {
+                    return (
+                        <li key={task.id}>
+                            <input type="checkbox" checked={task.isDone} /><span>{task.title}</span>
+                        </li>
+                    )
+                })}
             </ul>
 
             <div>
@@ -42,7 +40,7 @@ export const Todolist = ({title, tasks}: PropsType) => {
                 <button>Active</button>
                 <button>Completed</button>
             </div>
-
+            <div>{date}</div>
         </div>
     )
 }
