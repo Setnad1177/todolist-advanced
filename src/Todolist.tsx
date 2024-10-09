@@ -1,5 +1,6 @@
 import React from "react"
 import {TaskType} from "./App";
+import {Button} from "./Button";
 
 type PropsType = {
     title: string
@@ -22,10 +23,14 @@ export const Todolist = ({title, tasks, date}: PropsType) => {
 
             <div>
                 <input/>
-                <button>+</button>
+                <Button title={"+"}/>
             </div>
 
+            {tasks.length === 0 ? (
+                <p>No tasks</p>
+            ) : (
             <ul>
+
                 {tasks.map(task => {
                     return (
                         <li key={task.id}>
@@ -33,7 +38,7 @@ export const Todolist = ({title, tasks, date}: PropsType) => {
                         </li>
                     )
                 })}
-            </ul>
+            </ul>)}
 
             <div>
                 <button>All</button>
