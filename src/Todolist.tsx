@@ -4,23 +4,16 @@ import {Button} from "./Button";
 
 type PropsType = {
     title: string
-    subTitle?: string
-    description?: string
     tasks: TaskType[]
-    date?: string
+    removeTask: (taskIdToRemove: number) => void
 }
 
-export const Todolist = ({title, tasks, date}: PropsType) => {
+export const Todolist = ({title, tasks, removeTask}: PropsType) => {
 
 
     return (
         <div>
-
             <h3>{title}</h3>
-            {/*<h4>{subTitle}</h4>*/}
-            {/*<p>{description}</p>*/}
-            {/*<div>{tasks.map(t => t.title)}</div>*/}
-
             <div>
                 <input/>
                 <Button title={"+"}/>
@@ -34,7 +27,9 @@ export const Todolist = ({title, tasks, date}: PropsType) => {
                 {tasks.map(task => {
                     return (
                         <li key={task.id}>
-                            <input type="checkbox" checked={task.isDone} /><span>{task.title}</span>
+                            <input type="checkbox" checked={task.isDone}/>
+                            <span>{task.title}</span>
+                            <button onClick={      () => removeTask(task.id)     }>x</button>
                         </li>
                     )
                 })}
@@ -45,7 +40,6 @@ export const Todolist = ({title, tasks, date}: PropsType) => {
                 <button>Active</button>
                 <button>Completed</button>
             </div>
-            <div>{date}</div>
         </div>
     )
 }
