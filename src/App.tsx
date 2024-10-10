@@ -17,19 +17,30 @@ export function App() {
         {id: 5, title: "Typescript", isDone: false},
         {id: 6, title: "RTK query", isDone: false},
     ])
-
+    //useState to remove and update (show up to date) list of tasks
     const removeTask = (taskIdToRemove: number) => {
         const filteredTasks = tasks.filter(task => {
             return task.id !== taskIdToRemove
         })
         setTasks(filteredTasks)
     }
+    //useState to filter task by all/active/completed/
+    const [filter, setFilter] = useState('all')
+    let tasksForTodolist = tasks
+
+    if (filter === 'active') {
+        tasksForTodolist = tasks.filter(task => !task.isDone)
+    }
+
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter(task => task.isDone)
+    }
 
     return (
         <div className="App">
             <Todolist
                 title="What to learn"
-                tasks={tasks}
+                tasks={tasksForTodolist}
                 removeTask={removeTask}
             />
         </div>
