@@ -8,6 +8,8 @@ export type TaskType = {
     isDone: boolean
 }
 
+export type FilterValuesType = 'all' | 'active' | 'completed'
+
 export function App() {
     const [tasks, setTasks] = useState<TaskType[]>([
         {id: 1, title: "HTML&CSS", isDone: true},
@@ -24,8 +26,14 @@ export function App() {
         })
         setTasks(filteredTasks)
     }
-    //useState to filter task by all/active/completed/
-    const [filter, setFilter] = useState('all')
+    //useState to filter tasks by all/active/completed/
+    const [filter, setFilter] = useState<FilterValuesType>('all')
+
+    // changing filter state with button click(all/active/completed)
+    const changeFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+    }
+
     let tasksForTodolist = tasks
 
     if (filter === 'active') {
@@ -42,6 +50,7 @@ export function App() {
                 title="What to learn"
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
+                changeFilter={changeFilter}
             />
         </div>
     );
