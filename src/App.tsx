@@ -19,6 +19,7 @@ export function App() {
         {id: 5, title: "Typescript", isDone: false},
         {id: 6, title: "RTK query", isDone: false},
     ])
+
     //useState to remove and update (show up to date) list of tasks
     const removeTask = (taskIdToRemove: number) => {
         const filteredTasks = tasks.filter(task => {
@@ -26,10 +27,11 @@ export function App() {
         })
         setTasks(filteredTasks)
     }
-    //useState to filter tasks by all/active/completed/
+
+    //useState declaration to filter tasks by all/active/completed/
     const [filter, setFilter] = useState<FilterValuesType>('all')
 
-    // changing filter state with button click(all/active/completed)
+    // changing filter state with button click (filter types: all/active/completed)
     const changeFilter = (filter: FilterValuesType) => {
         setFilter(filter)
     }

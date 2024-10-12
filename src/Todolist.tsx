@@ -14,11 +14,12 @@ export const Todolist = ({title, tasks, removeTask, changeFilter}: PropsType) =>
 
     return (
         <div>
-            {/*<h3>{title}</h3>*/} //fix
-            {/*<div>*/}
-            {/*    <input/>*/}
-            {/*    <Button title={"+"}/>*/}
-            {/*</div>*/}
+            <h3>{title}</h3>
+            <div>
+                {/*Input with "add task (+) button"*/}
+                <input/>
+                <Button title={"+"}/>
+            </div>
 
             {tasks.length === 0 ? (
                 <p>No tasks</p>
@@ -38,6 +39,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter}: PropsType) =>
                 </ul>)}
 
             <div>
+                {/*task filter buttons*/}
                 <Button title={"All"} onClick={()=> changeFilter("all")}/>
                 <Button title={"Active"} onClick={()=> changeFilter("active")}/>
                 <Button title={"Completed"} onClick={()=> changeFilter("completed")}/>
