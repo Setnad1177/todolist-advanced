@@ -9,9 +9,10 @@ export type TaskType = {
     isDone: boolean
 }
 
-export type FilterValuesType = 'all' | 'active' | 'completed'
+export type FilterValuesType = "all" | "active" | "completed"
 
 export function App() {
+
     const [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
@@ -21,6 +22,16 @@ export function App() {
         {id: v1(), title: "RTK query", isDone: false},
     ])
 
+    //task adding
+    const addTask = () => {
+        const newTask = {
+            id: v1(),
+            title: "New Task",
+            isDone: false,
+        }
+        const newTasks = [newTask, ...tasks]
+        setTasks(newTasks)
+    }
     //useState to remove and update (show up to date) list of tasks
     const removeTask = (taskIdToRemove: string) => {
         const filteredTasks = tasks.filter(task => {
@@ -30,7 +41,7 @@ export function App() {
     }
 
     //useState declaration to filter tasks by all/active/completed/
-    const [filter, setFilter] = useState<FilterValuesType>('all')
+    const [filter, setFilter] = useState<FilterValuesType>("all")
 
     // changing filter state with button click (filter types: all/active/completed)
     const changeFilter = (filter: FilterValuesType) => {
@@ -39,11 +50,11 @@ export function App() {
 
     let tasksForTodolist = tasks
 
-    if (filter === 'active') {
+    if (filter === "active") {
         tasksForTodolist = tasks.filter(task => !task.isDone)
     }
 
-    if (filter === 'completed') {
+    if (filter === "completed") {
         tasksForTodolist = tasks.filter(task => task.isDone)
     }
 
@@ -54,6 +65,7 @@ export function App() {
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
         </div>
     );
