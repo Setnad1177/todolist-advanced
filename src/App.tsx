@@ -23,10 +23,10 @@ export function App() {
     ])
 
     //task adding
-    const addTask = () => {
+    const addTask = (taskTitle: string) => {
         const newTask = {
             id: v1(),
-            title: "New Task",
+            title: taskTitle,
             isDone: false,
         }
         const newTasks = [newTask, ...tasks]
