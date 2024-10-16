@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {KeyboardEvent, ChangeEvent, useState} from "react"
 import {FilterValuesType, TaskType} from "./App";
 import {Button} from "./Button";
 
@@ -15,20 +15,37 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: Prop
     //useState for task title(name) input
     const [taskTitle, setTaskTitle] = useState<string>("")
 
-
+    //addTask Handler
+    const addTaskHandler = () => {
+        addTask(taskTitle)
+        setTaskTitle("")
+    }
+    //changeTaskTitle Handler
+    const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle(event.currentTarget.value)
+    }
+//addTaskOnKeyUp Handler
+    const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            addTaskHandler()
+        }
+    }
+//changeFilterTasks Handler
+    const changeFilterTasksHandler = (filter: FilterValuesType) => {
+        changeFilter(filter)
+    }
     return (
         <div>
             <h3>{title}</h3>
             <div>
                 {/*Input with "add task (+) button"*/}
                 <input value={taskTitle}
-                       onChange={event => setTaskTitle(event.currentTarget.value)}/>
+                       onChange={changeTaskTitleHandler}
+                       //add task on Enter key press
+                       onKeyUp={addTaskOnKeyUpHandler}
+                />
 
-                <Button title={"+"}
-                        onClick={() => {
-                            addTask(taskTitle)
-                            setTaskTitle("");
-                        }}/>
+                <Button title={"+"} onClick={addTaskHandler}/>
             </div>
 
 
@@ -42,7 +59,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: Prop
                             <li key={task.id}>
                                 <input type="checkbox" checked={task.isDone}/>
                                 <span>{task.title}</span>
-                                {/* "x" Button component to delete a task*/}
+                                {/* "x" Button to delete a task*/}
                                 <Button title={"x"} onClick={() => removeTask(task.id)}/>
                             </li>
                         )
@@ -51,9 +68,9 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: Prop
 
             <div>
                 {/*task filter buttons*/}
-                <Button title={"All"} onClick={() => changeFilter("all")}/>
-                <Button title={"Active"} onClick={() => changeFilter("active")}/>
-                <Button title={"Completed"} onClick={() => changeFilter("completed")}/>
+                <Button title={'All'} onClick={() => changeFilterTasksHandler('all')} />
+                <Button title={'Active'} onClick={() => changeFilterTasksHandler('active')} />
+                <Button title={'Completed'} onClick={() => changeFilterTasksHandler('completed')} />
             </div>
         </div>
     )
