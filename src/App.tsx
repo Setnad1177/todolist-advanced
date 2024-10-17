@@ -48,6 +48,13 @@ export function App() {
         setFilter(filter)
     }
 
+    //Checkbox of Task change (change Task status)
+    const changeTaskStatus = (taskId: string, taskStatus: boolean) => {
+        const newState = tasks.map(t => (t.id == taskId ? { ...t, isDone: taskStatus } : t))
+        setTasks(newState)
+    }
+
+
     let tasksForTodolist = tasks
 
     if (filter === "active") {
@@ -66,6 +73,7 @@ export function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
             />
         </div>
     );
