@@ -20,11 +20,8 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
     const addTaskHandler = () => {
         // restrict empty task adding
         if (taskTitle.trim() !== "") {
-
             // delete spaces at the beginning and the end of the task name
             addTask(taskTitle.trim())
-
-            addTask(taskTitle)
             setTaskTitle("")
         }
     }
