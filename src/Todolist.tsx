@@ -16,15 +16,22 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
     //useState for task title(name) input
     const [taskTitle, setTaskTitle] = useState<string>("")
 
+    //useState for error message while adding new Task
+    const [error, setError] = useState<string | null>(null)
+
     //addTask Handler
     const addTaskHandler = () => {
         // restrict empty task adding
         if (taskTitle.trim() !== "") {
             // delete spaces at the beginning and the end of the task name
             addTask(taskTitle.trim())
+
             setTaskTitle("")
+        } else {
+            setError("Title is required")
         }
     }
+
     //changeTaskTitle Handler
     const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value)
@@ -32,6 +39,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
 
     //addTaskOnKeyUp Handler
     const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (event.key === "Enter") {
             addTaskHandler()
         }
@@ -53,14 +61,19 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
         <div>
             <h3>{title}</h3>
             <div>
-                {/*Input with "add task (+) button"*/}
-                <input value={taskTitle}
-                       onChange={changeTaskTitleHandler}
+                {/*Task Input with "add task (+) button"*/}
+                <input
+                    value={taskTitle}
+                    onChange={changeTaskTitleHandler}
                     //add task on Enter key press
-                       onKeyUp={addTaskOnKeyUpHandler}
+                    onKeyUp={addTaskOnKeyUpHandler}
+                    //error on wrong Task name
+                    className={error ? 'error' : ''}
                 />
 
                 <Button title={"+"} onClick={addTaskHandler}/>
+                {/*error message for wrong Task name*/}
+                {error && <div className={'error-message'}>{error}</div>}
             </div>
 
 
@@ -73,10 +86,11 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
                         return (
                             <li key={task.id}>
 
-                                {/*tasks checkboxes*/}
+                                {/*Tasks checkboxes*/}
                                 <input type="checkbox"
                                        checked={task.isDone}
-                                       onChange={changeTaskStatusHandler(task)}/>
+                                       onChange={changeTaskStatusHandler(task)}
+                                />
 
 
                                 <span>{task.title}</span>
