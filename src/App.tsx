@@ -51,12 +51,18 @@ export function App() {
         setTasks(filteredTasks)
     }
 
-    //useState declaration to filter tasks by all/active/completed/
-    const [filter, setFilter] = useState<FilterValuesType>("all")
 
     // changing filter state with button click (filter types: all/active/completed)
-    const changeFilter = (filter: FilterValuesType) => {
-        setFilter(filter)
+
+    // (old version) const changeFilter = (filter: FilterValuesType) => {
+    //     setFilter(filter)
+    // }
+    //new version:
+    const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+        const newTodolists = todolists.map(tl => {
+            return tl.id === todolistId ? {...tl, filter} : tl
+        })
+        setTodolists(newTodolists)
     }
 
     //Checkbox of Task change (change Task status)
@@ -68,23 +74,27 @@ export function App() {
 
     let tasksForTodolist = tasks
 
-    if (filter === "active") {
-        tasksForTodolist = tasks.filter(task => !task.isDone)
-    }
-
-    if (filter === "completed") {
-        tasksForTodolist = tasks.filter(task => task.isDone)
-    }
-
 
     //return
 
     return (
         <div className="App">
             {todolists.map(tl => {
+
+                let tasksForTodolist = tasks
+
+                if (tl.filter === "active") {
+                    tasksForTodolist = tasks.filter(task => !task.isDone)
+                }
+
+                if (tl.filter === "completed") {
+                    tasksForTodolist = tasks.filter(task => task.isDone)
+                }
+
                 return (
                     <Todolist
                         key={tl.id}
+                        todolistId={tl.id}
                         title={tl.title}
                         tasks={tasksForTodolist}
                         removeTask={removeTask}

@@ -4,15 +4,26 @@ import {Button} from "./Button";
 
 type PropsType = {
     title: string
+    todolistId: string
     tasks: TaskType[]
     removeTask: (taskIdToRemove: string) => void
-    changeFilter: (filter: FilterValuesType) => void
+    changeFilter: (filter: FilterValuesType, todolistId: string) => void
     addTask: (taskTitle: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
     filter: FilterValuesType
 }
 
-export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, changeTaskStatus, filter}: PropsType) => {
+export const Todolist = ({
+                             title,
+                             todolistId,
+                             tasks,
+                             removeTask,
+                             changeFilter,
+                             addTask,
+                             changeTaskStatus,
+                             filter
+                         }: PropsType) => {
+
 
     //useState for task title(name) input
     const [taskTitle, setTaskTitle] = useState<string>("")
@@ -48,7 +59,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
 
     //changeFilterTasks Handler
     const changeFilterTasksHandler = (filter: FilterValuesType) => {
-        changeFilter(filter)
+        changeFilter(filter, todolistId)
     }
 
     //changeTaskStatus Handler
@@ -69,12 +80,12 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
                     //add task on Enter key press
                     onKeyUp={addTaskOnKeyUpHandler}
                     //error on wrong Task name
-                    className={error ? 'error' : ''}
+                    className={error ? "error" : ""}
                 />
 
                 <Button title={"+"} onClick={addTaskHandler}/>
                 {/*error message for wrong Task name*/}
-                {error && <div className={'error-message'}>{error}</div>}
+                {error && <div className={"error-message"}>{error}</div>}
             </div>
 
             {/*No tasks / Or show Tasks list (with .map)*/}
@@ -85,7 +96,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
                     {tasks.map(task => {
                         return (
                             // If Task is done then add "is-done" class to it (to highlight the Task on the list)
-                            <li key={task.id} className={task.isDone ? 'is-done' : ''}>
+                            <li key={task.id} className={task.isDone ? "is-done" : ""}>
 
                                 {/*Tasks checkboxes*/}
                                 <input type="checkbox"
@@ -104,19 +115,19 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, chang
                 {/*task filter buttons*/}
                 <div>
                     <Button
-                        className={filter === 'all' ? 'active-filter' : ''}
-                        title={'All'}
-                        onClick={() => changeFilterTasksHandler('all')}
+                        className={filter === "all" ? "active-filter" : ""}
+                        title={"All"}
+                        onClick={() => changeFilterTasksHandler("all")}
                     />
                     <Button
-                        className={filter === 'active' ? 'active-filter' : ''}
-                        title={'Active'}
-                        onClick={() => changeFilterTasksHandler('active')}
+                        className={filter === "active" ? "active-filter" : ""}
+                        title={"Active"}
+                        onClick={() => changeFilterTasksHandler("active")}
                     />
                     <Button
-                        className={filter === 'completed' ? 'active-filter' : ''}
-                        title={'Completed'}
-                        onClick={() => changeFilterTasksHandler('completed')}
+                        className={filter === "completed" ? "active-filter" : ""}
+                        title={"Completed"}
+                        onClick={() => changeFilterTasksHandler("completed")}
                     />
                 </div>
             </div>
