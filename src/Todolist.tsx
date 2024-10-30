@@ -6,10 +6,10 @@ type PropsType = {
     title: string
     todolistId: string
     tasks: TaskType[]
-    removeTask: (taskIdToRemove: string) => void
+    removeTask: (taskIdToRemove: string, todolistId: string) => void
     changeFilter: (filter: FilterValuesType, todolistId: string) => void
-    addTask: (taskTitle: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    addTask: (taskTitle: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
     filter: FilterValuesType
 }
 
@@ -36,7 +36,7 @@ export const Todolist = ({
         // restrict empty task adding
         if (taskTitle.trim() !== "") {
             // delete spaces at the beginning and the end of the task name
-            addTask(taskTitle.trim())
+            addTask(taskTitle.trim(), todolistId)
 
             setTaskTitle("")
         } else {
@@ -66,7 +66,7 @@ export const Todolist = ({
     //Task checkbox change. If Task is done or not (task status)
     const changeTaskStatusHandler = (task: TaskType) => (e: ChangeEvent<HTMLInputElement>) => {
         const newStatusValue = e.currentTarget.checked
-        changeTaskStatus(task.id, newStatusValue)
+        changeTaskStatus(task.id, newStatusValue, todolistId)
     }
 
     return (
@@ -105,7 +105,7 @@ export const Todolist = ({
                                 />
                                 <span>{task.title}</span>
                                 {/* "x" Button to delete a task*/}
-                                <Button title={"x"} onClick={() => removeTask(task.id)}/>
+                                <Button title={"x"} onClick={() => removeTask(task.id, todolistId)}/>
                             </li>
                         )
                     })}
