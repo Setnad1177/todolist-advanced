@@ -1,6 +1,6 @@
-import React, { KeyboardEvent, ChangeEvent, useState } from "react";
-import { FilterValuesType, TaskType } from "./App";
-import { Button } from "./Button";
+import React, {KeyboardEvent, ChangeEvent, useState} from "react";
+import {FilterValuesType, TaskType} from "./App";
+import {Button} from "./Button";
 
 type PropsType = {
     title: string; // Title of the todolist
@@ -80,7 +80,7 @@ export const Todolist = ({
                 />
 
                 {/* Button to add a new task */}
-                <Button title={"+"} onClick={addTaskHandler} />
+                <Button title={"+"} onClick={addTaskHandler}/>
 
                 {/* Display error message if input validation fails */}
                 {error && <div className={"error-message"}>{error}</div>}
@@ -108,7 +108,7 @@ export const Todolist = ({
                             <span>{task.title}</span>
 
                             {/* Button to remove the task */}
-                            <Button title={"x"} onClick={() => removeTask(task.id, todolistId)} />
+                            <Button title={"x"} onClick={() => removeTask(task.id, todolistId)}/>
                         </li>
                     ))}
                 </ul>
