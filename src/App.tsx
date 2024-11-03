@@ -10,6 +10,11 @@ export type TaskType = {
     isDone: boolean  // Task completion status
 }
 
+// Type for tasks state
+export type TasksStateType = {
+    [key: string]: TaskType[]
+}
+
 export type FilterValuesType = "all" | "active" | "completed"  // Possible filter values
 
 type TodolistType = {
@@ -30,7 +35,7 @@ export function App() {
     ])
 
     // State to manage tasks
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
