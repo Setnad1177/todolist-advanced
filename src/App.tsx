@@ -1,7 +1,8 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import "./App.css"
-import {Todolist} from "./Todolist"
-import {v1} from "uuid"
+import { Todolist } from "./Todolist"
+import { v1 } from "uuid"
+import {AddItemForm} from "./AddItemForm";
 
 // Type definitions for Task and Filter
 export type TaskType = {
@@ -12,7 +13,7 @@ export type TaskType = {
 
 // Type for tasks state, mapping a todolist ID to an array of tasks
 export type TasksStateType = {
-    [key: string]: TaskType[]
+    [key: string]: TaskType[] // Tasks state: maps a todolist ID to an array of tasks
 }
 
 export type FilterValuesType = "all" | "active" | "completed"  // Possible filter values for tasks
@@ -25,26 +26,25 @@ type TodolistType = {
 
 // Main App component
 export function App() {
-    // Generate unique IDs for two example todolists
     let todolistID1 = v1() // ID for "What to learn"
     let todolistID2 = v1() // ID for "What to buy"
 
     // State to manage an array of todolists
     let [todolists, setTodolists] = useState<TodolistType[]>([
-        {id: todolistID1, title: "What to learn", filter: "all"}, // Example todolist 1
-        {id: todolistID2, title: "What to buy", filter: "all"} // Example todolist 2
+        { id: todolistID1, title: "What to learn", filter: "all" }, // Example todolist 1
+        { id: todolistID2, title: "What to buy", filter: "all" } // Example todolist 2
     ])
 
     // State to manage tasks, grouped by their corresponding todolist ID
     let [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
-            {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false}
+            { id: v1(), title: "HTML&CSS", isDone: true },
+            { id: v1(), title: "JS", isDone: true },
+            { id: v1(), title: "ReactJS", isDone: false }
         ],
         [todolistID2]: [
-            {id: v1(), title: "Rest API", isDone: true},
-            {id: v1(), title: "GraphQL", isDone: false}
+            { id: v1(), title: "Rest API", isDone: true },
+            { id: v1(), title: "GraphQL", isDone: false }
         ]
     })
 
@@ -59,7 +59,7 @@ export function App() {
         // Add the new task to the beginning of the corresponding todolist's task array
         const todolistTasks = tasks[todolistId]
         tasks[todolistId] = [newTask, ...todolistTasks]
-        setTasks({...tasks}) // Update the state with a new object
+        setTasks({ ...tasks }) // Update the state with a new object
     }
 
     // Function to remove a task from a specific todolist
@@ -67,13 +67,13 @@ export function App() {
         const todolistTasks = tasks[todolistId] // Get tasks for the specified todolist
         const newTodolistTasks = todolistTasks.filter((t) => t.id !== taskId) // Remove the task by ID
         tasks[todolistId] = newTodolistTasks // Update the tasks state for the todolist
-        setTasks({...tasks}) // Update state with a new object to trigger a re-render
+        setTasks({ ...tasks }) // Update state with a new object to trigger a re-render
     }
 
     // Function to change the filter of a specific todolist
     const changeFilter = (filter: FilterValuesType, todolistId: string) => {
         const newTodolists = todolists.map((tl) =>
-            tl.id === todolistId ? {...tl, filter} : tl // Update the filter for the matching todolist
+            tl.id === todolistId ? { ...tl, filter } : tl // Update the filter for the matching todolist
         )
         setTodolists(newTodolists) // Update the todolists state
     }
@@ -82,10 +82,10 @@ export function App() {
     const changeTaskStatus = (taskId: string, taskStatus: boolean, todolistId: string) => {
         const todolistTasks = tasks[todolistId] // Get tasks for the specified todolist
         const newTodolistTasks = todolistTasks.map((t) =>
-            t.id === taskId ? {...t, isDone: taskStatus} : t // Update the isDone status for the matching task
+            t.id === taskId ? { ...t, isDone: taskStatus } : t // Update the isDone status for the matching task
         )
         tasks[todolistId] = newTodolistTasks // Update the tasks state for the todolist
-        setTasks({...tasks}) // Update state with a new object to trigger a re-render
+        setTasks({ ...tasks }) // Update state with a new object to trigger a re-render
     }
 
     // Function to remove a todolist and its associated tasks
@@ -95,12 +95,25 @@ export function App() {
 
         // Delete tasks associated with the removed todolist
         delete tasks[todolistId]
-        setTasks({...tasks}) // Update state with a new object
+        setTasks({ ...tasks }) // Update state with a new object
+    }
+
+    // Function to add a new todolist
+    const addTodolist = (title: string) => {
+        const todolistId = v1() // Generate a new ID for the new todolist
+        const newTodolist: TodolistType = { id: todolistId, title: title, filter: "all" }
+
+        setTodolists([newTodolist, ...todolists]) // Add the new todolist to the state
+        setTasks({ ...tasks, [todolistId]: [] }) // Add an empty array for tasks for the new todolist
     }
 
     // Render the application
     return (
         <div className="App">
+            {/* Use AddItemForm to add a new todolist */}
+            <AddItemForm addItem={addTodolist} />
+
+            {/* Render the list of todolists */}
             {todolists.map((tl) => {
                 const allTodolistTasks = tasks[tl.id] // Get tasks for the current todolist
                 let tasksForTodolist = allTodolistTasks
