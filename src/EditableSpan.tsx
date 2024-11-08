@@ -13,10 +13,14 @@ export const EditableSpan = ({ value }: PropsType) => {
         setEditMode(true)
     }
 
+    const deactivateEditModeHandler = () => {
+        setEditMode(false)
+    }
+
     return (
         <>
             {editMode ? (
-                <input value={value} autoFocus />
+                <input value={value} onBlur={deactivateEditModeHandler} autoFocus />
             ) : (
                 <span onDoubleClick={activateEditModeHandler}>{value}</span>
             )}
