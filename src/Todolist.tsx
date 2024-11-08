@@ -2,6 +2,7 @@ import React from "react"
 import { TaskType, FilterValuesType } from "./App"
 import { AddItemForm } from './AddItemForm'
 import { Button } from './Button'
+import {EditableSpan} from "./EditableSpan";
 
 type PropsType = {
     title: string
@@ -50,7 +51,7 @@ export const Todolist = ({
                                 checked={task.isDone}
                                 onChange={(e) => changeTaskStatus(task.id, e.currentTarget.checked, todolistId)}
                             />
-                            <span>{task.title}</span>
+                            <EditableSpan value={task.title} />
                             <Button title={"x"} onClick={() => removeTask(task.id, todolistId)} />
                         </li>
                     ))}
