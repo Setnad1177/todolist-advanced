@@ -4,9 +4,10 @@ import input = Simulate.input;
 
 type PropsType = {
     value: string
+    onChange: (newTitle: string) => void
 }
 
-export const EditableSpan = ({ value }: PropsType) => {
+export const EditableSpan = ({ value, onChange }: PropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [title, setTitle] = useState(value)
 
@@ -16,6 +17,7 @@ export const EditableSpan = ({ value }: PropsType) => {
 
     const deactivateEditModeHandler = () => {
         setEditMode(false)
+        onChange(title)
     }
 
     const changeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
