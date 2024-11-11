@@ -1,11 +1,13 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
-import { Button } from './Button'
+import {Button} from "./Button";
+import {ChangeEvent, KeyboardEvent, useState} from "react";
+
 
 type PropsType = {
-    addItem: (title: string) => void // Callback для добавления элемента (задачи или тудулиста)
+    addItem: (title:string) => void
 }
 
-export const AddItemForm = ({ addItem }: PropsType) => {
+export const AddItemForm = ({addItem}: PropsType) => {
+
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
 
@@ -28,7 +30,6 @@ export const AddItemForm = ({ addItem }: PropsType) => {
             addItemHandler()
         }
     }
-
     return (
         <div>
             <input
@@ -37,8 +38,10 @@ export const AddItemForm = ({ addItem }: PropsType) => {
                 onChange={changeItemHandler}
                 onKeyUp={addItemOnKeyUpHandler}
             />
-            <Button title={'+'} onClick={addItemHandler} />
+            <Button title={'+'} onClick={addItemHandler}/>
             {error && <div className={'error-message'}>{error}</div>}
         </div>
     )
 }
+
+
