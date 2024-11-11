@@ -107,7 +107,7 @@ export function App() {
         setTasks({ ...tasks, [todolistId]: [] }); // Add an empty array for tasks for the new todolist
     };
 
-    // New callback for task title update
+    // Callback for task title update
     const updateTask = (todolistId: string, taskId: string, title: string) => {
         const newTodolistTasks = {
             ...tasks, // Spread the existing tasks state
@@ -117,6 +117,13 @@ export function App() {
         };
         setTasks(newTodolistTasks); // Update state with the new tasks object
     };
+
+    // Callback for todolist title update
+
+    const updateTodolist = (todolistId: string, title: string) => {
+        const newTodolists = todolists.map(tl => (tl.id === todolistId ? { ...tl, title } : tl))
+        setTodolists(newTodolists)
+    }
 
     // Render the application
     return (
@@ -150,6 +157,7 @@ export function App() {
                         filter={tl.filter} // Pass the current filter value
                         removeTodolist={removeTodolist} // Pass the function to remove the todolist
                         updateTask={updateTask} // Pass the function to update a task title
+                        updateTodolist={updateTodolist}
                     />
                 );
             })}

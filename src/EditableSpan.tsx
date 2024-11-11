@@ -1,13 +1,11 @@
 import {ChangeEvent, useState} from "react";
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
 
 type PropsType = {
     value: string
     onChange: (newTitle: string) => void
-}
+};
 
-export const EditableSpan = ({ value, onChange }: PropsType) => {
+export const EditableSpan = ({value, onChange}: PropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [title, setTitle] = useState(value)
 
@@ -26,14 +24,10 @@ export const EditableSpan = ({ value, onChange }: PropsType) => {
 
     return (
         <>
-            {editMode ? (
-                <input value={title}
-                       onChange={changeTitleHandler}
-                       onBlur={deactivateEditModeHandler}
-                       autoFocus />
-            ) : (
-                <span onDoubleClick={activateEditModeHandler}>{value}</span>
-            )}
+            {editMode
+                ? <input value={title} onChange={changeTitleHandler} onBlur={deactivateEditModeHandler} autoFocus/>
+                : <span onDoubleClick={activateEditModeHandler}>{value}</span>
+            }
         </>
-    )
-}
+    );
+};
