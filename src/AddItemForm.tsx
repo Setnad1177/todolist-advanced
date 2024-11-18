@@ -39,13 +39,15 @@ export const AddItemForm = ({addItem}: PropsType) => {
                 className={error ? 'error' : ''}
                 value={title}
                 size={'small'}
+                error={!!error}
+                helperText={error}
                 onChange={changeItemHandler}
                 onKeyUp={addItemOnKeyUpHandler}
             />
             <Button variant="contained" onClick={addItemHandler}>
                 +
             </Button>
-            {error && <div className={'error-message'}>{error}</div>}
+
         </div>
     )
 }

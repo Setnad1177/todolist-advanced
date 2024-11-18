@@ -8,7 +8,9 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
-
+import Checkbox from '@mui/material/Checkbox';
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
 
 type PropsType = {
     title: string
@@ -67,7 +69,7 @@ export const Todolist = (props: PropsType) => {
             {
                 tasks.length === 0
                     ? <p>No tasks ...</p>
-                    : <ul>
+                    : <List>
                         {tasks.map((task) => {
 
                             const removeTaskHandler = () => {
@@ -83,15 +85,19 @@ export const Todolist = (props: PropsType) => {
                                 updateTask(todolistId, task.id, title)
                             }
 
-                            return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
-                                <input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
+                            return <ListItem
+                                key={task.id}
+                                disableGutters
+                                disablePadding
+                                className={task.isDone ? 'is-done' : ''}>
+                                <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler} />
                                 <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
                                 <IconButton onClick={removeTaskHandler}>
                                     <ClearIcon/>
                                 </IconButton>
-                            </li>
+                            </ListItem>
                         })}
-                    </ul>
+                    </List>
             }
             <div>
                 <Button
