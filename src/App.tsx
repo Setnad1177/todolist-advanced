@@ -10,6 +10,9 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 //Material UI imports for App Bar end
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid2';
+import Paper from '@mui/material/Paper'
 
 // Type definitions for Task and Filter
 export type TaskType = {
@@ -136,7 +139,7 @@ export function App() {
     return (
         <div>
             {/*App Bar MUI*/}
-            <AppBar position="static">
+            <AppBar position="static" sx={{ mb: '30px' }}>
                 <Toolbar>
                     <IconButton color="inherit">
                         <MenuIcon/>
@@ -145,8 +148,14 @@ export function App() {
                 </Toolbar>
             </AppBar>
 
+            <Container fixed>
+                <Grid container sx={{ mb: '30px' }}>
+
             {/* Use AddItemForm to add a new todolist */}
             <AddItemForm addItem={addTodolist}/>
+                </Grid>
+
+                <Grid container spacing={4}>
 
             {/* Render the list of todolists */}
             {todolists.map((tl) => {
@@ -162,6 +171,8 @@ export function App() {
                 }
 
                 return (
+                    <Grid>
+                        <Paper sx={{ p: '0 20px 20px 20px' }}>
                     <Todolist
                         key={tl.id} // Use the todolist ID as a unique key
                         todolistId={tl.id} // Pass todolist ID to the Todolist component
@@ -176,8 +187,12 @@ export function App() {
                         updateTask={updateTask} // Pass the function to update a task title
                         updateTodolist={updateTodolist}
                     />
+                        </Paper>
+                    </Grid>
                 )
             })}
+                </Grid>
+            </Container>
         </div>
     )
 }
