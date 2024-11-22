@@ -12,6 +12,7 @@ import Checkbox from "@mui/material/Checkbox";
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import Box from "@mui/material/Box"
+import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles"
 
 type PropsType = {
     title: string
@@ -88,11 +89,7 @@ export const Todolist = (props: PropsType) => {
 
                             return <ListItem
                                 key={task.id}
-                                sx={{
-                                    p: 0,
-                                    justifyContent: "space-between",
-                                    opacity: task.isDone ? 0.5 : 1,
-                                }}
+                                sx={getListItemSx(task.isDone)}
                                 disableGutters
                                 disablePadding
                                 className={task.isDone ? "is-done" : ""}>
@@ -108,7 +105,7 @@ export const Todolist = (props: PropsType) => {
                     </List>
             }
 
-            <Box sx={{display: "flex", justifyContent: "space-between"}}>{/*...*/}
+            <Box sx={filterButtonsContainerSx}>{/*...*/}
                 <Button
                     variant={filter === "all" ? "outlined" : "text"}
                     color={"inherit"}
