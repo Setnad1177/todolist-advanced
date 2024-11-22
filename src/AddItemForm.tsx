@@ -1,25 +1,25 @@
 //import {Button} from "./Button";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField';
-import AddBoxIcon from '@mui/icons-material/AddBox'
-import IconButton from '@mui/material/IconButton'
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField";
+import AddBoxIcon from "@mui/icons-material/AddBox"
+import IconButton from "@mui/material/IconButton"
 
 type PropsType = {
-    addItem: (title:string) => void
+    addItem: (title: string) => void
 }
 
 export const AddItemForm = ({addItem}: PropsType) => {
 
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
     const addItemHandler = () => {
-        if (title.trim() !== '') {
+        if (title.trim() !== "") {
             addItem(title.trim())
-            setTitle('')
+            setTitle("")
         } else {
-            setError('Title is required')
+            setError("Title is required")
         }
     }
 
@@ -29,7 +29,7 @@ export const AddItemForm = ({addItem}: PropsType) => {
 
     const addItemOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             addItemHandler()
         }
     }
@@ -37,17 +37,17 @@ export const AddItemForm = ({addItem}: PropsType) => {
         <div>
             <TextField
                 label="Task title"
-                variant={'outlined'}
-                className={error ? 'error' : ''}
+                variant={"outlined"}
+                className={error ? "error" : ""}
                 value={title}
-                size={'small'}
+                size={"small"}
                 error={!!error}
                 helperText={error}
                 onChange={changeItemHandler}
                 onKeyUp={addItemOnKeyUpHandler}
             />
-            <IconButton onClick={addItemHandler} color={'primary'}>
-                <AddBoxIcon />
+            <IconButton onClick={addItemHandler} color={"primary"}>
+                <AddBoxIcon/>
             </IconButton>
 
         </div>

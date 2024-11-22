@@ -10,9 +10,11 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 //Material UI imports for App Bar end
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid2';
-import Paper from '@mui/material/Paper'
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid2";
+import Paper from "@mui/material/Paper"
+import {MenuButton} from "./MenuButton"
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // Type definitions for Task and Filter
 export type TaskType = {
@@ -36,6 +38,14 @@ type TodolistType = {
 
 // Main App component
 export function App() {
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#087EA4',
+            },
+        },
+    })
+
     let todolistID1 = v1()  // ID for "What to learn"
     let todolistID2 = v1()  // ID for "What to buy"
 
@@ -139,60 +149,66 @@ export function App() {
     return (
         <div>
             {/*App Bar MUI*/}
-            <AppBar position="static" sx={{ mb: '30px' }}>
-                <Toolbar>
+            <ThemeProvider theme={theme}>
+            <AppBar position="static" sx={{mb: "30px"}}>
+                <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                     <IconButton color="inherit">
                         <MenuIcon/>
                     </IconButton>
-                    <Button color="inherit">Login</Button>
+                    <div>
+                        <MenuButton>Login</MenuButton>
+                        <MenuButton>Logout</MenuButton>
+                        <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
+                    </div>
                 </Toolbar>
             </AppBar>
 
             <Container fixed>
-                <Grid container sx={{ mb: '30px' }}>
+                <Grid container sx={{mb: "30px"}}>
 
-            {/* Use AddItemForm to add a new todolist */}
-            <AddItemForm addItem={addTodolist}/>
+                    {/* Use AddItemForm to add a new todolist */}
+                    <AddItemForm addItem={addTodolist}/>
                 </Grid>
 
                 <Grid container spacing={4}>
 
-            {/* Render the list of todolists */}
-            {todolists.map((tl) => {
-                const allTodolistTasks = tasks[tl.id]  // Get tasks for the current todolist
-                let tasksForTodolist = allTodolistTasks
+                    {/* Render the list of todolists */}
+                    {todolists.map((tl) => {
+                        const allTodolistTasks = tasks[tl.id]  // Get tasks for the current todolist
+                        let tasksForTodolist = allTodolistTasks
 
-                // Filter tasks based on the current filter value
-                if (tl.filter === "active") {
-                    tasksForTodolist = allTodolistTasks.filter((task) => !task.isDone)  // Show only active tasks
-                }
-                if (tl.filter === "completed") {
-                    tasksForTodolist = allTodolistTasks.filter((task) => task.isDone)  // Show only completed tasks
-                }
+                        // Filter tasks based on the current filter value
+                        if (tl.filter === "active") {
+                            tasksForTodolist = allTodolistTasks.filter((task) => !task.isDone)  // Show only active tasks
+                        }
+                        if (tl.filter === "completed") {
+                            tasksForTodolist = allTodolistTasks.filter((task) => task.isDone)  // Show only completed tasks
+                        }
 
-                return (
-                    <Grid>
-                        <Paper sx={{ p: '0 20px 20px 20px' }}>
-                    <Todolist
-                        key={tl.id} // Use the todolist ID as a unique key
-                        todolistId={tl.id} // Pass todolist ID to the Todolist component
-                        title={tl.title} // Pass the title of the todolist
-                        tasks={tasksForTodolist} // Pass the filtered tasks
-                        removeTask={removeTask} // Pass the function to remove a task
-                        changeFilter={changeFilter} // Pass the function to change the filter
-                        addTask={addTask} // Pass the function to add a task
-                        changeTaskStatus={changeTaskStatus} // Pass the function to change task status
-                        filter={tl.filter} // Pass the current filter value
-                        removeTodolist={removeTodolist} // Pass the function to remove the todolist
-                        updateTask={updateTask} // Pass the function to update a task title
-                        updateTodolist={updateTodolist}
-                    />
-                        </Paper>
-                    </Grid>
-                )
-            })}
+                        return (
+                            <Grid>
+                                <Paper sx={{p: "0 20px 20px 20px"}}>
+                                    <Todolist
+                                        key={tl.id} // Use the todolist ID as a unique key
+                                        todolistId={tl.id} // Pass todolist ID to the Todolist component
+                                        title={tl.title} // Pass the title of the todolist
+                                        tasks={tasksForTodolist} // Pass the filtered tasks
+                                        removeTask={removeTask} // Pass the function to remove a task
+                                        changeFilter={changeFilter} // Pass the function to change the filter
+                                        addTask={addTask} // Pass the function to add a task
+                                        changeTaskStatus={changeTaskStatus} // Pass the function to change task status
+                                        filter={tl.filter} // Pass the current filter value
+                                        removeTodolist={removeTodolist} // Pass the function to remove the todolist
+                                        updateTask={updateTask} // Pass the function to update a task title
+                                        updateTodolist={updateTodolist}
+                                    />
+                                </Paper>
+                            </Grid>
+                        )
+                    })}
                 </Grid>
             </Container>
+            </ThemeProvider>
         </div>
     )
 }
