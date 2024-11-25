@@ -32,7 +32,7 @@ export type TasksStateType = {
 
 export type FilterValuesType = "all" | "active" | "completed"  // Possible filter values for tasks
 
-type TodolistType = {
+export type TodolistType = {
     id: string  // Unique ID of the todolist
     title: string  // Title of the todolist
     filter: FilterValuesType  // Current filter applied to the todolist

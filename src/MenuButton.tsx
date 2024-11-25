@@ -5,7 +5,7 @@ type MenuButtonProps = {
     background?: string;
 };
 
-// Получаем доступ к теме внутри styled компонента
+// Access the theme inside the styled component
 export const MenuButton = styled(Button, {
     shouldForwardProp: (prop) => prop !== "background",
 })<MenuButtonProps>(({ background, theme }) => ({
