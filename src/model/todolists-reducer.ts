@@ -56,3 +56,21 @@ export const todolistsReducer = (
             throw new Error("Unknown action type")
     }
 }
+
+
+// Action creators
+export const removeTodolistAC = (todolistId: string) => {
+    return { type: "REMOVE-TODOLIST", payload: { id: todolistId } } as const;
+};
+
+export const addTodolistAC = (title: string) => {
+    return { type: "ADD-TODOLIST", payload: { title } } as const;
+};
+
+export const changeTodolistTitleAC = (id: string, title: string) => {
+    return { type: "CHANGE-TODOLIST-TITLE", payload: { id, title } } as const;
+};
+
+export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => {
+    return { type: "CHANGE-TODOLIST-FILTER", payload: { id, filter } } as const;
+};
