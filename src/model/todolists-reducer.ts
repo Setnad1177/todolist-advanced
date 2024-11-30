@@ -76,6 +76,8 @@ export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type ChangeTodolistTitleActionType = ReturnType<typeof changeTodolistTitleAC>
 export type ChangeTodolistFilterActionType = ReturnType<typeof changeTodolistFilterAC>
 
+
+// Union type for all actions
 type ActionsType =
     | RemoveTodolistActionType
     | AddTodolistActionType
