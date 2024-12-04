@@ -28,7 +28,7 @@ export const todolistsReducer = (
         case "ADD-TODOLIST": {
             // Add a new todolist
             const newTodolist: TodolistType = {
-                id: v1(),
+                id: action.payload.todolistId,
                 title: action.payload.title,
                 filter: "all"
             }
@@ -58,9 +58,10 @@ export const removeTodolistAC = (todolistId: string) => {
     return { type: 'REMOVE-TODOLIST', payload: { id: todolistId } } as const
 }
 
-export const addTodolistAC = (title: string) => {
-    return { type: 'ADD-TODOLIST', payload: { title } } as const
-}
+export const addTodolistAC = (title: string) => ({
+    type: 'ADD-TODOLIST',
+    payload: { title, todolistId: v1() }, // Генерация id с помощью v1()
+} as const);
 
 export const changeTodolistTitleAC = (id: string, title: string) => {
     return { type: 'CHANGE-TODOLIST-TITLE', payload: { id, title } } as const
