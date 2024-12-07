@@ -61,7 +61,7 @@ export const removeTodolistAC = (todolistId: string) => {
 export const addTodolistAC = (title: string) => ({
     type: 'ADD-TODOLIST',
     payload: { title, todolistId: v1() }, // Генерация id с помощью v1()
-} as const);
+} as const)
 
 export const changeTodolistTitleAC = (id: string, title: string) => {
     return { type: 'CHANGE-TODOLIST-TITLE', payload: { id, title } } as const

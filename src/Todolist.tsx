@@ -1,14 +1,14 @@
-import {FilterValuesType, TaskType} from "./App";
-import {ChangeEvent} from "react";
-//import {Button} from "./Button";
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import {FilterValuesType, TaskType} from "./App"
+import {ChangeEvent} from "react"
+//import {Button} from "./Button"
+import {AddItemForm} from "./AddItemForm"
+import {EditableSpan} from "./EditableSpan"
 //Material UI
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
-import ClearIcon from "@mui/icons-material/Clear";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
+import ClearIcon from "@mui/icons-material/Clear"
+import Button from "@mui/material/Button"
+import Checkbox from "@mui/material/Checkbox"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import Box from "@mui/material/Box"

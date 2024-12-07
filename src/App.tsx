@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 //Material UI imports for App Bar end
 import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid2"
 import Paper from "@mui/material/Paper"
 import {MenuButton} from "./MenuButton"
 import {createTheme, ThemeProvider} from "@mui/material/styles"
