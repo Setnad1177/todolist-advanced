@@ -4,6 +4,7 @@ import "./index.css";
 import {App} from "./App";
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev";
+import {AppWithReducers} from "./AppWithReducers";
 
 
 const root = ReactDOM.createRoot(
@@ -14,7 +15,7 @@ root.render(
         <DevSupport ComponentPreviews={ComponentPreviews}
                     useInitialHook={useInitial}
         >
-            <App/>
+            <AppWithReducers/>
         </DevSupport>
     </React.StrictMode>
 );
