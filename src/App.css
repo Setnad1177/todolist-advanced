@@ -1,8 +1,10 @@
-.is-done {
-    opacity: 0.5;
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 }
 
-.todolist-title-container {
-    display: flex;
-    align-items: center;
+.container {
+  display: flex;
+  align-items: center;
 }

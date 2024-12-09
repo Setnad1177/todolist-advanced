@@ -1,42 +1,40 @@
-import {ChangeEvent, useState} from "react";
-import TextField from "@mui/material/TextField";
+import TextField from '@mui/material/TextField'
+import {type ChangeEvent, useState} from 'react'
 
-type PropsType = {
-    value: string
-    onChange: (newTitle: string) => void
-};
+type Props = {
+  value: string
+  onChange: (title: string) => void
+}
 
-export const EditableSpan = ({value, onChange}: PropsType) => {
-    const [editMode, setEditMode] = useState(false)
-    const [title, setTitle] = useState(value)
+export const EditableSpan = ({ value, onChange }: Props) => {
+  const [title, setTitle] = useState(value)
+  const [isEditMode, setIsEditMode] = useState(false)
 
-    const activateEditModeHandler = () => {
-        setEditMode(true)
-    }
+  const turnOnEditMode = () => {
+    setIsEditMode(true)
+  }
 
-    const deactivateEditModeHandler = () => {
-        setEditMode(false)
-        onChange(title)
-    }
+  const turnOffEditMode = () => {
+    setIsEditMode(false)
+    onChange(title)
+  }
 
-    const changeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.currentTarget.value)
-    }
+  const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.currentTarget.value)
+  }
 
-    return (
-        <>
-            {editMode ? (
-                <TextField
-                    variant={"outlined"}
-                    value={title}
-                    size={"small"}
-                    onChange={changeTitleHandler}
-                    onBlur={deactivateEditModeHandler}
-                    autoFocus
-                />
-            ) : (
-                <span onDoubleClick={activateEditModeHandler}>{value}</span>
-            )}
-        </>
-    );
-};
+  return (
+      <>
+        {isEditMode ? (
+            <TextField variant={'outlined'}
+                       value={title}
+                       size={'small'}
+                       onChange={changeTitle}
+                       onBlur={turnOffEditMode}
+                       autoFocus/>
+        ) : (
+            <span onDoubleClick={turnOnEditMode}>{value}</span>
+        )}
+      </>
+  )
+}
