@@ -1,6 +1,6 @@
-# IT-INCUBATOR Todolist Project
+# Advanced Todolist Project
 
-## React + TypeScript + Vite
+## React (Redux+RTK) + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite.
 
