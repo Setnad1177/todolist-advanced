@@ -16,9 +16,3 @@ export type GetTasksResponse = {
   totalCount: number
   error: string | null
 }
-
-export type GetTasksRespons = {
-  items: Task[]
-  totalCount: number
-  error: string | null
-}

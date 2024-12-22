@@ -1,9 +1,8 @@
 import { instance } from "@/common/instance"
-import type { BaseResponse } from "@/common/types"
-import type { Todolist } from "./todolistsApi.types"
+import { GetTasksResponse } from "@/features/todolists/api/tasksApi.types.ts"
 
 export const tasksApi = {
   getTasks(todolistId: string) {
-    return instance.get<any>(`/todo-lists/${todolistId}/tasks`)
+    return instance.get<GetTasksResponse>(`/todo-lists/${todolistId}/tasks`)
   },
 }
