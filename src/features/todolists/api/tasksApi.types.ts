@@ -19,9 +19,9 @@ export type GetTasksResponse = {
 
 export type UpdateTaskModel = {
   title: string
-  description: string
+  description: string | null
   status: number
   priority: number
-  startDate: string
-  deadline: string
+  startDate: string | null
+  deadline: string | null
 }

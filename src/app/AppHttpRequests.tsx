@@ -4,7 +4,7 @@ import type { Todolist } from "@/features/todolists/api/todolistsApi.types"
 import { type ChangeEvent, type CSSProperties, useEffect, useState } from "react"
 import Checkbox from "@mui/material/Checkbox"
 import { tasksApi } from "@/features/todolists/api/tasksApi.ts"
-import { Task } from "@/features/todolists/api/tasksApi.types.ts"
+import { Task, UpdateTaskModel } from "@/features/todolists/api/tasksApi.types.ts"
 
 export const AppHttpRequests = () => {
   const [todolists, setTodolists] = useState<Todolist[]>([])
@@ -48,7 +48,27 @@ export const AppHttpRequests = () => {
 
   const deleteTask = (todolistId: string, taskId: string) => {}
 
-  const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>, task: any) => {}
+  const changeTaskStatus = (event: ChangeEvent<HTMLInputElement>, task: Task) => {
+    const todoListId = task.todoListId
+
+    const model: UpdateTaskModel = {
+      title: task.title,
+      startDate: task.startDate,
+      deadline: task.deadline,
+      description: task.description,
+      priority: task.priority,
+      status: event.currentTarget.checked ? 2 : 0,
+    }
+
+    tasksApi.updateTask(todoListId, task.id, model).then((res) => {
+      const updatedTask = res.data.data.item
+
+      setTasks({
+        ...tasks,
+        [todoListId]: tasks[todoListId].map((item) => (item.id === task.id ? updatedTask : item)),
+      })
+    })
+  }
 
   const changeTaskTitle = (task: any, title: string) => {}
 
