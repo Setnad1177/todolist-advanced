@@ -3,24 +3,23 @@ import { appReducer } from "./app-reducer"
 import { tasksReducer } from "@/features/todolists/model/tasks-reducer"
 import { todolistsReducer } from "@/features/todolists/model/todolists-reducer"
 
-// combine reducers using combineReducers
+// объединение reducer'ов с помощью combineReducers
 const rootReducer = combineReducers({
   tasks: tasksReducer,
   todolists: todolistsReducer,
   app: appReducer,
 })
 
-// store creation
+// создание store
 export const store = configureStore({
   reducer: rootReducer,
 })
 
-// automatic type detection of the entire state object
-
+// автоматическое определение типа всего объекта состояния
 export type RootState = ReturnType<typeof store.getState>
 // автоматическое определение типа метода dispatch
 export type AppDispatch = typeof store.dispatch
 
-// to be able to access store in the browser console
+// для возможности обращения к store в консоли браузера
 // @ts-ignore
 window.store = store
