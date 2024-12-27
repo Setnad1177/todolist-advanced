@@ -1,6 +1,6 @@
 # Advanced Todolist Project
 
-## React (Redux+RTK) + TypeScript + Vite
+## eact (Redux+RTK) + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite.
 
